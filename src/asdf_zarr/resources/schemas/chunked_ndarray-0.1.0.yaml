@@ -1,0 +1,43 @@
+%YAML 1.1
+---
+$schema: "http://stsci.edu/schemas/yaml-schema/draft-01"
+id: "asdf://asdf-format.org/chunked_ndarray/schemas/chunked_ndarray-0.1.0"
+
+title: Chunked n-dimensional array
+description: >
+  An n-dimensional array, stored in n-dimensional chunks for
+  efficient access to subarrays.
+
+type: object
+properties:
+  shape:
+    type: array
+    items:
+      type: integer
+      minimum: 0
+
+  chunk_shape:
+    type: array
+    items:
+      type: integer
+      minimum: 0
+
+  datatype:
+    $ref: "http://stsci.edu/schemas/asdf/core/ndarray-1.0.0#/definitions/scalar-datatype"
+
+  byteorder:
+    description: >
+      The byte order (big- or little-endian) of the array data.
+    type: string
+    enum: [big, little]
+
+  sources:
+    type: array
+    items:
+      anyOf:
+        - type: integer
+        - $ref: "#/properties/source"
+
+required: [shape, chunk_shape, datatype, sources]
+propertyOrder: [shape, chunk_shape, datatype, sources]
+...

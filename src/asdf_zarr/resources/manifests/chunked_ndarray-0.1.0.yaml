@@ -1,0 +1,11 @@
+id: asdf://asdf-format.org/chunked_ndarray/manifests/chunked_ndarray-0.1.0
+extension_uri: asdf://asdf-format.org/chunked_ndarray/extensions/chunked_ndarray-0.1.0
+title: Chunked n-dimensional array extension 0.1.0
+description: Tags representing chunked n-dimensional arrays.
+tags:
+- tag_uri: asdf://asdf-format.org/chunked_ndarray/tags/chunked_ndarray-0.1.0
+  schema_uri: asdf://asdf-format.org/chunked_ndarray/schemas/chunked_ndarray-0.1.0
+  title: Chunked n-dimensional array
+  description: >
+    An n-dimensional array, stored in n-dimensional chunks for
+    efficient access to subarrays.

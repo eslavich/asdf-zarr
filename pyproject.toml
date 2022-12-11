@@ -1,0 +1,79 @@
+[project]
+name = 'asdf_zarr'
+description = 'ASDF extension providing serialization support for zarr arrays'
+readme = 'README.rst'
+requires-python = '>=3.8'
+license = { file = 'LICENSE' }
+authors = [{ name = 'The ASDF Developers', email = 'help@stsci.edu' }]
+classifiers = [
+    'Programming Language :: Python',
+    'Programming Language :: Python :: 3',
+    'Programming Language :: Python :: 3.8',
+    'Programming Language :: Python :: 3.9',
+    'Programming Language :: Python :: 3.10',
+    'Development Status :: 5 - Production/Stable',
+    'Intended Audience :: Science/Research',
+    'Topic :: Scientific/Engineering :: Astronomy',
+]
+dependencies = [
+  'asdf >= 2.12.1',
+  'zarr'
+]
+dynamic = ['version']
+
+[project.optional-dependencies]
+test = [
+    'pytest',
+]
+
+[project.urls]
+'tracker' = 'https://github.com/asdf-format/asdf-zarr/issues'
+'documentation' = 'https://asdf-zarr.readthedocs.io/en/latest/'
+'repository' = 'https://github.com/asdf-format/asdf-zarr'
+
+[project.entry-points]
+'asdf.resource_mappings' = { asdf_zarr = 'asdf_zarr.integration:get_resource_mappings' }
+'asdf.extensions' = { asdf_zarr = 'asdf_zarr.integration:get_extensions' }
+
+[build-system]
+requires = [
+    "setuptools>=60",
+    "setuptools_scm[toml]>=3.4",
+    "wheel"
+]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools_scm]
+write_to = "src/asdf_zarr/_version.py"
+
+[tool.setuptools.package-dir]
+'' = "src"
+
+[tool.pytest.ini_options]
+asdf_schema_root = 'src/asdf_zarr/resources/schemas'
+asdf_schema_tests_enabled = 'true'
+testpaths = """
+    tests
+    src/asdf_zarr/resources
+"""
+addopts = '--color=yes'
+
+[tool.black]
+line-length = 120
+force-exclude = '''
+^/(
+  (
+      \.eggs
+    | \.git
+    | \.pytest_cache
+    | \.tox
+    | build
+    | dist
+  )/
+)
+'''
+
+[tool.isort]
+profile = "black"
+filter_files = true
+line_length = 120
