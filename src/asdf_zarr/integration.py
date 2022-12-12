@@ -1,4 +1,3 @@
-from pathlib import Path
 import sys
 
 if sys.version_info < (3, 9):
@@ -6,11 +5,11 @@ if sys.version_info < (3, 9):
 else:
     import importlib.resources as importlib_resources
 
+from asdf.extension import ManifestExtension
 from asdf.resource import DirectoryResourceMapping
 
-from asdf.extension import ManifestExtension
-
 import asdf_zarr
+
 from .converter import ChunkedNdarrayConverter
 
 
@@ -35,6 +34,6 @@ def get_extensions():
     return [
         ManifestExtension.from_uri(
             "asdf://asdf-format.org/chunked_ndarray/manifests/chunked_ndarray-0.1.0",
-            converters=[ChunkedNdarrayConverter()]
+            converters=[ChunkedNdarrayConverter()],
         )
     ]

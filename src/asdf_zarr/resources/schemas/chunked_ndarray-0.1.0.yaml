@@ -31,12 +31,19 @@ properties:
     type: string
     enum: [big, little]
 
+  fill_value:
+    description: >
+      Value that fills missing chunks in sparse arrays.  If missing,
+      fill value is assumed to be 0.
+    type: number
+
   sources:
     type: array
     items:
       anyOf:
         - type: integer
-        - $ref: "#/properties/source"
+        - type: "null"
+        - $ref: "#/properties/sources"
 
 required: [shape, chunk_shape, datatype, sources]
 propertyOrder: [shape, chunk_shape, datatype, sources]
