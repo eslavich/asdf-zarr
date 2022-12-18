@@ -21,7 +21,7 @@ class ChunkedNdarrayConverter(Converter):
         # TODO: We'd eventually like to store this in an additional block
         # instead of in the YAML.
         sources = _create_sources(shape, chunk_shape)
-        chunk_size = np.prod(chunk_shape) * obj.dtype.itemsize
+        chunk_size = int(np.prod(chunk_shape) * obj.dtype.itemsize)
 
         for key in obj.store.keys():
             if key != ".zarray":
@@ -76,7 +76,7 @@ def _create_sources(shape, chunk_shape):
 
 
 def _create_data_callback(obj, key, chunk_shape):
-    if isinstance(obj.store._mutable_mapping, AsdfStorage):
+    if hasattr(obj.store, "_mutable_mapping") and isinstance(obj.store._mutable_mapping, AsdfStorage):
         return lambda: obj.store._mutable_mapping.get_ndarray(key)
     else:
         indices = [int(k) for k in key.split(".")]
